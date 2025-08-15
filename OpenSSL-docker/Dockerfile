@@ -24,8 +24,19 @@ RUN git clone https://github.com/openssl/openssl.git
 # 进入OpenSSL目录
 WORKDIR /opt/openssl
 
-# 检出2025-3-31之前的版本 (使用OpenSSL 3.0.13，发布于2024年1月)
-RUN git checkout openssl-3.0.13
+# bug link: http://github.com/openssl/openssl/pull/27631
+# bug fix:   
+    # commit 8e704858f21983383be2b77e986f475b51719a1e (HEAD)
+    # Author: Rich Salz <rsalz@akamai.com>
+    # Date:   Fri Sep 4 08:13:19 2015 -0400
+
+    #     RT3955: Reduce some stack usage
+        
+    #     Use malloc/free instead of big onstack buffers.
+        
+    #     Reviewed-by: Tim Hudson <tjh@openssl.org>
+
+RUN git checkout 8e704858f21983383be2b77e986f475b51719a1e
 
 # 配置编译选项
 RUN ./Configure linux-x86_64 \
