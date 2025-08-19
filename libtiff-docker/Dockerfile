@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 设置工作目录
-WORKDIR /opt
+WORKDIR /root
 
 # memory leak link: https://gitlab.com/libtiff/libtiff/-/commit/0ce7d7766c6608c1b98bd62e5e83e74b3617bdad
 # memory leak fix:   
@@ -34,7 +34,7 @@ WORKDIR /opt
 RUN git clone https://gitlab.com/libtiff/libtiff.git
 
 # 进入libtiff目录
-WORKDIR /opt/libtiff
+WORKDIR /root/libtiff
 
 # 生成configure脚本
 RUN ./autogen.sh
